@@ -1,18 +1,19 @@
-// src/pages/Home.tsx
-import React from 'react';
-import {GetBlogs, type PageReq} from '../components/Blogs';
-import BlogList from "../components/BlogList";
+import { RoutePath } from "@/routes/Route";
+import { Link, Outlet } from "react-router";
 
-const Home: React.FC = () => {
-    const blogs = GetBlogs({} as PageReq);
-    return (
-        <div>
-            <h2>博客列表</h2>
-            {blogs.data.map((b) => (
-                <BlogList {...b} />
-            ))}
-        </div>
-    );
+const blogIdList = [1, 2, 3];
+const Home = () => {
+  return (
+    <div>
+      Home
+      <nav>
+        {blogIdList.map((id) => (
+          <Link to={RoutePath.Blog + "/" + id}>Blog {id}</Link>
+        ))}
+      </nav>
+      <Outlet />
+    </div>
+  );
 };
 
 export default Home;
