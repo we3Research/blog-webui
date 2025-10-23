@@ -19,21 +19,21 @@ export const AddAuthor = ({ isOpen, onClose, onSubmit }) => {
         <div className="modal">
             <div className="modal-content">
                 <h2>添加作家</h2>
-                <label>
+                <div>
                     笔名:
                     <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
-                </label>
-                <label>
+                </div>
+                <div>
                     简介:
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                </label>
+                </div>
                 <button onClick={handleSubmit}>确定</button>
                 <button onClick={onClose}>取消</button>
             </div>
