@@ -1,0 +1,415 @@
+{
+  "address": "AGRJdaV5t2rKK7nTYFQiRztu8tKkKgoXMprTECZrLc7A",
+  "metadata": {
+    "name": "blog",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_author",
+      "discriminator": [
+        106,
+        184,
+        56,
+        143,
+        66,
+        222,
+        226,
+        115
+      ],
+      "accounts": [
+        {
+          "name": "author",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "uid"
+              }
+            ]
+          }
+        },
+        {
+          "name": "author_list",
+          "writable": true
+        },
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "uid",
+          "type": "i64"
+        },
+        {
+          "name": "pseudonym",
+          "type": "string"
+        },
+        {
+          "name": "introduction",
+          "type": "string"
+        },
+        {
+          "name": "updater",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "create_blog",
+      "discriminator": [
+        221,
+        118,
+        241,
+        5,
+        53,
+        181,
+        90,
+        253
+      ],
+      "accounts": [
+        {
+          "name": "blog_metadata",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  108,
+                  111,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "author"
+              },
+              {
+                "kind": "arg",
+                "path": "index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "author",
+          "writable": true
+        },
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "i64"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "cid",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "init",
+      "discriminator": [
+        220,
+        59,
+        207,
+        236,
+        108,
+        250,
+        47,
+        100
+      ],
+      "accounts": [
+        {
+          "name": "author_list",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  95,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "update_author",
+      "discriminator": [
+        78,
+        222,
+        178,
+        81,
+        116,
+        168,
+        105,
+        169
+      ],
+      "accounts": [
+        {
+          "name": "author",
+          "writable": true
+        },
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "introduction",
+          "type": "string"
+        },
+        {
+          "name": "updater",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "update_blog",
+      "discriminator": [
+        252,
+        54,
+        5,
+        181,
+        182,
+        6,
+        112,
+        203
+      ],
+      "accounts": [
+        {
+          "name": "blog_metadata",
+          "writable": true
+        },
+        {
+          "name": "author",
+          "writable": true
+        },
+        {
+          "name": "signer",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "new_title",
+          "type": "string"
+        },
+        {
+          "name": "new_content",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Author",
+      "discriminator": [
+        136,
+        201,
+        168,
+        93,
+        108,
+        12,
+        36,
+        134
+      ]
+    },
+    {
+      "name": "AuthorList",
+      "discriminator": [
+        72,
+        197,
+        183,
+        235,
+        197,
+        208,
+        23,
+        7
+      ]
+    },
+    {
+      "name": "BlogMetadata",
+      "discriminator": [
+        134,
+        137,
+        176,
+        251,
+        229,
+        53,
+        155,
+        37
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "Unauthorized",
+      "msg": "Unauthorized: Only the creator can modify this blog."
+    },
+    {
+      "code": 6001,
+      "name": "NotFound",
+      "msg": "Blog not found."
+    },
+    {
+      "code": 6002,
+      "name": "AuthorListNotInit",
+      "msg": "Author List not init blog."
+    },
+    {
+      "code": 6003,
+      "name": "IndexWrong",
+      "msg": "Index Wrong."
+    }
+  ],
+  "types": [
+    {
+      "name": "Author",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "uid",
+            "type": "i64"
+          },
+          {
+            "name": "pseudonym",
+            "type": "string"
+          },
+          {
+            "name": "introduction",
+            "type": "string"
+          },
+          {
+            "name": "total",
+            "type": "i64"
+          },
+          {
+            "name": "updater",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AuthorList",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "total",
+            "type": "i64"
+          },
+          {
+            "name": "updater",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BlogMetadata",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "index",
+            "type": "i64"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "cid",
+            "type": "string"
+          },
+          {
+            "name": "create_at",
+            "type": "i64"
+          },
+          {
+            "name": "update_at",
+            "type": "i64"
+          },
+          {
+            "name": "history",
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "author",
+            "type": "pubkey"
+          }
+        ]
+      }
+    }
+  ]
+}
